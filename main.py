@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect
-import flask_login
 from flask_login import LoginManager
 from data import db_session
 from forms.user import RegisterForm
@@ -28,7 +27,6 @@ def about():
     return render_template('about.html')
 
 
-
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
@@ -53,10 +51,10 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#    db_sess = db_session.create_session()
-#    return db_sess.query(User).get(user_id)
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
 
 
 if __name__ == '__main__':
