@@ -5,7 +5,7 @@ from forms.user import RegisterForm
 from data.users import User
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 def main():
     db_session.global_init("db/web.db")
@@ -47,7 +47,7 @@ def reqister():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
-        return redirect('/login')
+        return redirect('/')
     return render_template('register.html', title='Регистрация', form=form)
 
 
