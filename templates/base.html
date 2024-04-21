@@ -76,83 +76,21 @@
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Features</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Enterprise</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Support</a>
-          <a class="py-2 link-body-emphasis text-decoration-none" href="register">Sing In</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="add">Добавить товар</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="login">Sign In</a>
+          <a class="py-2 link-body-emphasis text-decoration-none" href="register">Sign Up</a>
       </nav>
 
     </div>
-    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal text-body-emphasis">Популярные товары</h1>
-      <p class="fs-5 text-body-secondary"></p>
-    </div>
+
   </header>
 
-  <main>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Комплект носков</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">250 рублей<small class="text-body-secondary fw-light"></small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>Европейское качество</li>
-              <li>5 штук в комплекте</li>
-              <li>Красивый дизайн</li>
-              <li>Цвет - белый</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Перейти в карточку</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Флаг Российской Империи</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">650 рублей<small class="text-body-secondary fw-light"></small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>Отечественный производитель</li>
-              <li>Высокое качество</li>
-              <li>Быстрая доставка</li>
-              <li>Размеры 90x135см</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Перейти в карточку</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Кроссовки Puma 180</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">3500 рублей<small class="text-body-secondary fw-light"></small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>Гарантия на возврат</li>
-              <li>Натуральная ткань</li>
-              <li>Черный цвет</li>
-              <li>Все размеры</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Перейти в карточку</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
+
+  {% block content %}{%endblock%}
 
 
 
-    <div class="table-responsive">
-      <table class="table text-center">
-
-
-
-      </table>
-    </div>
-  </main>
 
   <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div class="row">
@@ -192,6 +130,9 @@
     </div>
   </footer>
 </div>
+
+
+
 <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
