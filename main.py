@@ -73,6 +73,10 @@ def login():
 def logined():
     return render_template('logined.html')
 
+@app.route('/korzina')
+def korzina():
+    return render_template('korzina.html')
+
 
 @app.route('/add')
 def add():
