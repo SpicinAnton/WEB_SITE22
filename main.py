@@ -93,6 +93,12 @@ def add():
     return render_template('add.html', form=form)
 
 
+@app.route('/poisk')
+def poisk():
+    db_sess = db_session.create_session()
+    tovars = db_sess.query(Tovar)
+    text = 'телефон'
+    return render_template('poisk.html', tovars=tovars, text=text)
 
 
 if __name__ == '__main__':
