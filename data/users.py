@@ -1,26 +1,31 @@
-from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, TextAreaField, SubmitField, EmailField
-from wtforms.validators import DataRequired
+import datetime
+import sqlalchemy
+from flask_login import UserMixin
+from sqlalchemy import orm
+from data.db_session import SqlAlchemyBase
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class RegisterForm(FlaskForm):
-    email = EmailField('Почта', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
-    name = StringField('Имя пользователя', validators=[DataRequired()])
-    submit = SubmitField('Зарегистрироваться')
+class User(SqlAlchemyBase, UserMixin):
+    __tablename__ = 'users'
+
+    id = sqlalchemy.Column(sqlalchemy.Integer,
+                           primary_key=True, autoincrement=True)
+    name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    email = sqlalchemy.Column(sqlalchemy.String,
+                              index=True, unique=True, nullable=True)
+    hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    created_date = sqlalchemy.Column(sqlalchemy.DateTime,
+                                     default=datetime.datetime.now)
 
 
-class LoginForm(FlaskForm):
-    email = EmailField('Почта', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    submit = SubmitField('Войти')
+    def __repr__(self):
+        return f'<User> {self.id} {self.name} {self.email}'
+
+    def set_password(self, password):
+        self.hashed_password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.hashed_password, password)
 
 
-class TovarForm(FlaskForm):
-    name = StringField('Название товара', validators=[DataRequired()])
-    name1 = StringField('Описание товара', validators=[DataRequired()])
-    name2 = StringField('Размеры товара', validators=[DataRequired()])
-    name3 = StringField('Материалы товара', validators=[DataRequired()])
-    prise = StringField('Цена товара', validators=[DataRequired()])
-    submit = SubmitField('Выставить на продажу')
