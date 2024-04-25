@@ -2,7 +2,8 @@ from flask import Flask, render_template, redirect
 from flask_login import LoginManager
 from data import db_session
 from forms.user import RegisterForm, LoginForm, TovarForm
-from data.users import User, Tovar
+from data.users import User
+from data. tovars import Tovar
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -71,37 +72,26 @@ def login():
 
 @app.route('/logined')
 def logined():
-    return render_template('logined.html')
+    db_sess = db_session.create_session()
+    tovars = db_sess.query(Tovar)
+    return render_template('logined.html', tovars=tovars)
 
 
-@app.route('/korzina')
-def korzina():
-    return render_template('korzina.html')
-
-
-@app.route('/add')
+@app.route('/add', methods=['GET', 'POST'])
 def add():
-    form1 = TovarForm()
-    if form1.validate_on_submit():
+    form = TovarForm()
+    if form.validate_on_submit():
         db_sess = db_session.create_session()
-        if db_sess.query(Tovar).filter(Tovar.name == form1.name.data).first():
-            return render_template('add.html', title='Добавить товар',
-                                   form=form1,
-                                   message="Такой товар уже есть")
         tovar = Tovar(
-            name=form1.name.data,
-            name1=form1.name1.data,
-            name2=form1.name2.data,
-            name3=form1.name3.data,
-            prise=form1.prise.data,
-
+            name=form.name.data,
+            description=form.description.data,
+            price=form.price.data
         )
-        tovar.set_password(form1.name.data)
         db_sess.add(tovar)
         db_sess.commit()
         return redirect('/logined')
-    return render_template('add.html', form=form1)
-#
+    return render_template('add.html', form=form)
+
 
 
 
