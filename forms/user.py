@@ -19,8 +19,6 @@ class LoginForm(FlaskForm):
 
 class TovarForm(FlaskForm):
     name = StringField('Название товара', validators=[DataRequired()])
-    name1 = StringField('Описание товара', validators=[DataRequired()])
-    name2 = StringField('Размеры товара', validators=[DataRequired()])
-    name3 = StringField('Материалы товара', validators=[DataRequired()])
-    prise = StringField('Материалы товара', validators=[DataRequired()])
+    description = StringField('Описание товара', validators=[DataRequired()])
+    price = StringField('Цена товара', validators=[DataRequired()])
     submit = SubmitField('Выставить на продажу')
