@@ -1,9 +1,9 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager
 from data import db_session
 from forms.user import RegisterForm, LoginForm, TovarForm
 from data.users import User
-from data. tovars import Tovar
+from data. tovars import Tovar, Korzina
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -93,12 +93,25 @@ def add():
     return render_template('add.html', form=form)
 
 
-@app.route('/poisk')
+@app.route('/korzina', methods=['GET', 'POST'])
+def korzina():
+    form = TovarForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        tovar = Tovar(
+            name=form.name.data,
+            description=form.description.data,
+            price=form.price.data
+        )
+        db_sess.add(tovar)
+        db_sess.commit()
+        return redirect('/logined')
+    return render_template('korzina.html')
+
+
+@app.route('/poisk', methods=['GET', 'POST'])
 def poisk():
-    db_sess = db_session.create_session()
-    tovars = db_sess.query(Tovar)
-    text = 'телефон'
-    return render_template('poisk.html', tovars=tovars, text=text)
+    return render_template('poisk.html')
 
 
 if __name__ == '__main__':
