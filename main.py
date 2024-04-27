@@ -20,13 +20,12 @@ login_manager.init_app(app)
 
 @app.route('/')
 def index():
-    return render_template('glav_str.html')
+    db_sess = db_session.create_session()
+    tovars = db_sess.query(Tovar)
+    return render_template('glav_str.html',tovars=tovars)
     # 'WouldBerris'
 
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
